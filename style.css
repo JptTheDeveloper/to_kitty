@@ -33,7 +33,7 @@
   100% { opacity: 1; }
 }
 
-.typewriter h1 {
+.typewriter div {
   overflow: hidden; /* Ensures the content is not revealed until the animation */
   border-right: .15em solid orange; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
@@ -41,7 +41,7 @@
   letter-spacing: .15em; /* Adjust as needed */
   animation: 
     typing 3.5s steps(40, end),
-    blink-caret .75s step-end 5;
+    blink-caret .75s step-end infinite;
 }
 
 /* The typing effect */
