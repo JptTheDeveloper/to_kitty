@@ -38,7 +38,7 @@
             text: "Here's to your happiest year so far :DD",
         },
         {
-            text: "My favorite, goat admirer, sleepy soldier, and speed reading whisperer :p <3 - Pablo"
+            text: "My favorite goat admirer, sleepy soldier, and speed reading whisperer :p <3 - Pablo"
         }
 
     ]
