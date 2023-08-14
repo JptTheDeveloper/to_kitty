@@ -1,28 +1,55 @@
 <script>
     import Typewriter, { loopOnce } from 'svelte-typewriter';
+    const lines = [
+        {
+            text: "Happy Birthday Bluumarine!",
+        },
+        {
+            text: "You are really cool.",
+        },
+        {
+            text: "From one overthinker, to another ...",
+        },
+        {
+            text: "I want you to know ...",
+        },
+        {
+            text: "You are really, really, so COOOL :D !\n\n",
+        },
+        {
+            text: "I really, really, hope this year is super great for you.",
+        },
+        {
+            text: "------------------------------",
+        },
+        {
+            text: "(Couldn't figure out how to line break in a cool way)"
+        },
+        {
+            text: "-----------------------------",
+        },
+        {
+            text: "Anyways (lol) look at you! You are now 22! Congrats again :D.",
+        },
+        {
+            text: "I can't imagine what great things will come your way.",
+        },
+        {
+            text: "Here's to your happiest year so far :DD",
+        },
+        {
+            text: "My favorite, goat admirer, sleepy soldier, and speed reading whisperer :p <3 - Pablo"
+        }
+
+    ]
 </script>
 
-<Typewriter>
-    <h1>Happy Birthday Bluumarine!!</h1>
-</Typewriter>
-
-<Typewriter cursor={false} mode=loopOnce delay={2000}>
-    <h1>You are really cool. </h1>
-</Typewriter>
-
-<Typewriter cursor={false} mode=loopOnce delay={4000}>
-    <h1>From one overthinker, to another ...</h1>
-</Typewriter>
-
-<Typewriter cursor={false} mode=loopOnce delay={6000}>
-    <h1>I want you to know ... </h1>
-</Typewriter>
-
-<Typewriter cursor={false} mode=loopOnce delay={8000}>
-    <h1>You are so cool! :D </h1>
-</Typewriter>
-
-<Typewriter cursor={false} mode=loopOnce delay={10000}>
-    <h1>I really, really, really hope this year is super great for you. </h1>
-</Typewriter> 
-
+{#each lines as line, i (line.text)}
+    <Typewriter
+        interval={50}
+        cursor={false}
+        mode=loopOnce
+        delay={i * 3500}>
+        <h3>{line.text}</h3>
+    </Typewriter>
+{/each}
