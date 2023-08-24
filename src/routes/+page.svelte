@@ -12,10 +12,10 @@
 
 {#each lines as line, i (line.text)}
     <Typewriter
-        interval={100}
+        interval={70}
         cursor={false}
         mode=loopOnce
-        delay={i * 3500}>
+        delay={i * 4500}>
         <h3>{line.text}</h3>
     </Typewriter>
 {/each}
