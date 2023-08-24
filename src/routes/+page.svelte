@@ -12,7 +12,7 @@
 
 {#each lines as line, i (line.text)}
     <Typewriter
-        interval={50}
+        interval={100}
         cursor={false}
         mode=loopOnce
         delay={i * 3500}>
