@@ -2,45 +2,11 @@
     import Typewriter, { loopOnce } from 'svelte-typewriter';
     const lines = [
         {
-            text: "Happy Birthday Bluumarine!",
+            text: "We probably can't give you all the peace you need :( ..."
         },
         {
-            text: "You are really cool.",
+            text: "...but we can make each day a little better :hug"
         },
-        {
-            text: "From one overthinker, to another ...",
-        },
-        {
-            text: "I want you to know ...",
-        },
-        {
-            text: "You are really, really, so COOOL :D !\n\n",
-        },
-        {
-            text: "I really, really, hope this year is super great for you.",
-        },
-        {
-            text: "------------------------------",
-        },
-        {
-            text: "(Couldn't figure out how to line break in a cool way)"
-        },
-        {
-            text: "-----------------------------",
-        },
-        {
-            text: "Anyways (lol) look at you! You are now 22! Congrats again :D.",
-        },
-        {
-            text: "I can't imagine what great things will come your way.",
-        },
-        {
-            text: "Here's to your happiest year so far :DD",
-        },
-        {
-            text: "My favorite goat admirer, sleepy soldier, and speed reading whisperer :p <3 - Pablo"
-        }
-
     ]
 </script>
 
