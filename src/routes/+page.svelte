@@ -1,56 +1,128 @@
+<style>
+    .main {
+        flex:2;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        background-color: black;
+    }
+    .list {
+        flex:1;
+        flex-direction: column;
+        border: 4px ridge greenyellow;
+        border-radius: 4px;
+        padding: 2px;
+        margin-top: 16px;
+    }
+    .list-item {
+        border: 4px ridge white;
+        padding: 4px;
+        margin: 0px;
+    }
+    .large-button {
+        min-width: fit-content;
+        width: 50%;
+    }
+    .timer-buttons {
+        margin-top: 10px;
+        background-color: blueviolet;
+        width: fit-content;
+    }
+    @keyframes flickerAnimation {
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+    }
+    @-o-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+    }
+    @-moz-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+    }
+    @-webkit-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+    }
+    .animate-flicker {
+    -webkit-animation: flickerAnimation 1s infinite;
+    -moz-animation: flickerAnimation 1s infinite;
+    -o-animation: flickerAnimation 1s infinite;
+        animation: flickerAnimation 1s infinite;
+    }
+</style>
 <script>
-    import Typewriter, { loopOnce } from 'svelte-typewriter';
-    const msgs = [
-        "I am sending you all the strength I can <3. Things will be okay",
-        "Dexter is happy to have you as his owner, he feels supported by you <3",
-        "It's stressful. It's a lot. Know that you are doing your best :hug",
-        "You are incredible. Dexter is blessed to have you as his owner",
-        "Your heart agonizes. It's awful. Things will get better :hug ",
-        "You are brilliant and diligent. You are the best caretaker Dexter could ask for",
-        "You have a internet family ready to help you. They will do so much for you. We're ready to support.",
-        "You have a weird programmer guy who deeply cares about you. Things will be okay :hug",
-        "6 months of discord friendship means I would download fortnight and play it non-stop for you (:",
-        "Mina or your gaming pals would too! :DD",
-        "It will be okay :hug",
-        "Dexter - 'Meow Meow Meow' =>(Translated)=> 'Thank you mom/owner/parent for taking care of me :D'",
-        "Dexter - 'Meow Meow Meow' =>(Translated)=> 'We'll play more when I'm better!'",
-        "Dexter - 'Meow Meow Meow' =>(Translated)=> 'You are doing your best. I'm happy you're here'",
-        "Dexter - 'Meow Meow Meow' =>(Translated)=> 'Your jokes are funny! I can't laugh cause I'm a cat. If I could though, you'd hear me all the time :D'"
-    ]
-    const formatted_msgs = msgs.map((msg) => ({"text": msg}))
-    const seconds = new Date().getTime() / 1000;
-    const item_num = Math.floor((seconds % 60) % formatted_msgs.length)
-    const lines = [formatted_msgs[item_num]]
-    // const lines = [
-    //     {
-    //         text: "We probably can't give you all the peace you need :( ..."
-    //     },
-    //     {
-    //         text: "...but we can make each day a little better :hug"
-    //     },
-    //     {
-    //         text: "Please be kind to yourself."
-    //     },
-    //     {
-    //         text: "Accept yourself."
-    //     },
-    //     {
-    //         text: "Feel the love from your cats and fishies."
-    //     },
-    //     {
-    //         text: "I wish I knew",
-    //     },
-    //     {
-    //         text: "the magical set of words to correct what you're feeling inside :hug"
-    //     },
-    // ]
+    let welcome_screen = true;
+    let entries = [true, true]
+    let timer_running = false;
+    let timer_paused = false;
+    setInterval(() =>{
+        if (timer_running && !timer_paused && minutesLeft > 0) {
+            decrementMinute()
+        }
+    }, 1000)
+
+    let minutesLeft = 1
+    function togglePausingTimer() {
+        timer_paused = !timer_paused
+    }
+    function decrementMinute() {
+        if (minutesLeft > 0) {
+            minutesLeft -= 1
+        } else {
+            alert("Less than zero minutes not allowed >:O *makes bot noises*")
+        }
+    }
+    function incrementMinute() {
+        if (minutesLeft < 300) {
+            minutesLeft +=1
+        } else {
+            alert("I think 5hrs is a pretty good upper limit ngl - don't press it more than that lol")
+        }
+    }
+    function GoTakeABreak() {
+        const entry = confirm("Did you take a water, eye, or stand up and stretch break? (\"Ok\" means yes")
+        entries = [...entries, entry]
+        timer_running = false;
+        timer_paused = false;
+        minutesLeft = 20
+        const audio = new Audio('audio_file.mp3');
+        audio.play()
+    }
+    function startTimer() {
+        welcome_screen = false;
+        timer_running = true;
+        timer_paused = false;
+    }
+
+    $: (timer_running && minutesLeft == 0) && GoTakeABreak()
+    $: timer_ended = timer_running == false && timer_running == false
 </script>
-{#each lines as line, i (line.text)}
-    <Typewriter
-        interval={40}
-        cursor={false}
-        mode=loopOnce
-        delay={i * 4500}>
-        <h3>{line.text}</h3>
-    </Typewriter>
-{/each}
+<div class="main">
+    {#if welcome_screen}
+    <div>Hello!</div>
+     <button on:click={startTimer}>Click Here</button>
+    {:else if timer_running}
+        <div class="animate-flicker">Timer status: {timer_paused?"Currently paused (:":"In progress :D ..."}</div>
+        <button class="large-button" on:click={togglePausingTimer}>{timer_paused?"I>":"II"}</button>        
+    {:else if timer_ended} 
+        <div>Done!</div>
+        <button on:click={startTimer}>Start A New Timer :DD</button>
+    {/if}
+    <div class="timer-buttons">
+        <button on:click={decrementMinute} disabled={timer_running && !timer_paused}>-</button>
+        {!timer_running?"(: Set Timer For ...":""}  {minutesLeft} Minute(s) {timer_running? "Left!":""}
+        <button on:click={incrementMinute} disabled={timer_running && !timer_paused}>+</button>
+    </div>
+    <div class="list">
+    {#each entries as entry}
+    <!-- Use Green and add a star for good entries, Add a counter on successes,  -->
+        <div class="list-item">{entry?"You did it": "You did not, but it's okay!"}</div>
+    {/each}
+    </div>
+</div>
