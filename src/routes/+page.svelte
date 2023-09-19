@@ -62,7 +62,7 @@
     }
 </style>
 <script>
-    let default_minutes = 5;
+    let default_minutes = 20;
     function decrementDefaultMinute(){
         if (default_minutes > 0) {
             default_minutes -= 1
@@ -89,7 +89,7 @@
         if (timer_running && !timer_paused && minutesLeft > 0) {
             decrementMinute()
         }
-    }, 1000)
+    }, 60*1000)
 
     let minutesLeft = default_minutes;
     function togglePausingTimer() {

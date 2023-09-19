@@ -5,22 +5,21 @@
 		<link rel="icon" href="./favicon.png" />
 		<meta name="viewport" content="width=device-width" />
 		
-		<link href="./_app/immutable/assets/2.85214208.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.04848dd7.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.b9502305.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.6117d091.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.d6ac504b.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/preload-helper.a4192956.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.5bebf885.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/0.2db7ec50.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/2.e8823f00.js">
+		<link href="./_app/immutable/assets/2.a54eea9a.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.833a95a5.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.e108d1fd.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.965ec14f.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.a5eb331b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.06801730.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.135cd789.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.7e0f3e93.js">
 	</head>
 	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">  <noscript><h3>Dexter - 'Meow Meow Meow' =>(Translated)=> 'You are doing your best. I'm happy you're here'</h3> </noscript>    
+		<div style="display: contents">  <div class="main svelte-1y95fo"><h1 data-svelte-h="svelte-1yp0jc5">Kitty&#39;s Counter</h1> <div style="padding:16px">Hello! This is an attempt to make life +1% better! May it help with it's creation or use (:</div> <div data-svelte-h="svelte-dntpg9">Done!</div> <button data-svelte-h="svelte-1hjpd4j">Start A New Timer :DD</button> <h2 data-svelte-h="svelte-71jfxu">Configuration:</h2> <div data-svelte-h="svelte-vrwbpt">The following changes the default minutes set for the timer.</div> <div data-svelte-h="svelte-1qnlv9c">When the timer ends, this is the time that will be set as a default.</div> <div data-svelte-h="svelte-1kw9ga6">This is only updatable when the timer isn&#39;t running.</div> <br> <div class="timer-buttons svelte-1y95fo"><button >-</button> (: Default Timer is: 20 Minute(s) <button >+</button></div> <br> <br> <div data-svelte-h="svelte-141g9a1">The following shows the minutes left in the current timer.</div> <div data-svelte-h="svelte-pz0ij3">It also lets you update the currently running timer.</div> <div data-svelte-h="svelte-1hbwez6">This is only updatable when the timer is paused.</div> <div class="timer-buttons svelte-1y95fo"><button disabled>-</button> Update Timer For ... 20 Minute(s)  <button disabled>+</button></div> </div> 
 			
 			<script>
 				{
-					__sveltekit_ynti9p = {
+					__sveltekit_i4ni9h = {
 						assets: "/happy-birthday",
 						base: new URL(".", location).pathname.slice(0, -1),
 						env: {}
@@ -31,8 +30,8 @@
 					const data = [null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.04848dd7.js"),
-						import("./_app/immutable/entry/app.d6ac504b.js")
+						import("./_app/immutable/entry/start.833a95a5.js"),
+						import("./_app/immutable/entry/app.a5eb331b.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2],
