@@ -62,7 +62,7 @@
     }
 </style>
 <script>
-    const DEFAULT_TIMER_MINUTES = 5;
+    const DEFAULT_TIMER_MINUTES = 25;
     let welcome_screen = true;
     /**
 	 * @type {any[]}
@@ -105,11 +105,14 @@
         timer_running = false;
         timer_paused = false;
         minutesLeft = DEFAULT_TIMER_MINUTES;
+        let msg = "-break-msg-"+getRandomInt(4)+".mp3"
         if (entry) {
-            const audio = new Audio('yes-break-msg-1.mp3');
+            msg = "yes" + msg
+            const audio = new Audio(msg);
             audio.play()
         } else {
-            const audio = new Audio('no-break-msg-1.mp3');
+            msg = "no" + msg
+            const audio = new Audio(msg);
             audio.play()
         }
     }
@@ -128,7 +131,7 @@
     function getRandomInt(max) {
      return Math.floor(Math.random() * max);
     }
-    let success_msgs = ["You did it! :D", "Your body thanks you :hug", "I'm happy you did that c:", "Look at you! Pop off Queen!"]
+    let success_msgs = ["You did it! :D", "Your body thanks you :hug", "I'm happy you did that c:", "Look at you! Kitty is k-taking care of herself!"]
     let failure_msgs = ["It's okay! You got it next time :)", "Thanks for trying! It counts just as much :hug", "It's okay :hug - you got it next time c:"]
 </script>
 <div class="main">
