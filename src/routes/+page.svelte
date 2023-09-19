@@ -1,4 +1,7 @@
 <style>
+    p, div, h1, h2 {
+        color: white;
+    }
     .main {
         flex:2;
         flex-direction: column;
