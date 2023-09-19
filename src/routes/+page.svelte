@@ -1,5 +1,5 @@
 <style>
-    p, div, h1, h2 {
+    div, h1, h2 {
         color: white;
     }
     .main {
