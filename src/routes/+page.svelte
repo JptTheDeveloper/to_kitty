@@ -10,13 +10,18 @@
     .list {
         flex:1;
         flex-direction: column;
-        border: 4px ridge greenyellow;
+        border: 4px ridge purple;
         border-radius: 4px;
         padding: 2px;
         margin-top: 16px;
     }
-    .list-item {
-        border: 4px ridge white;
+    .list-item-success {
+        border: 4px ridge green;
+        padding: 4px;
+        margin: 0px;
+    }
+    .list-item-failure {
+        border: 4px ridge yellow;
         padding: 4px;
         margin: 0px;
     }
@@ -57,17 +62,22 @@
     }
 </style>
 <script>
+    const DEFAULT_TIMER_MINUTES = 5;
     let welcome_screen = true;
-    let entries = [true, true]
+    /**
+	 * @type {any[]}
+	 */
+    let entries = []
     let timer_running = false;
     let timer_paused = false;
     setInterval(() =>{
+        // @ts-ignore
         if (timer_running && !timer_paused && minutesLeft > 0) {
             decrementMinute()
         }
     }, 1000)
 
-    let minutesLeft = 1
+    let minutesLeft = DEFAULT_TIMER_MINUTES;
     function togglePausingTimer() {
         timer_paused = !timer_paused
     }
@@ -87,12 +97,21 @@
     }
     function GoTakeABreak() {
         const entry = confirm("Did you take a water, eye, or stand up and stretch break? (\"Ok\" means yes")
-        entries = [...entries, entry]
+        let message = success_msgs[getRandomInt(success_msgs.length)] 
+        if (!entry) {
+            message = failure_msgs[getRandomInt(failure_msgs.length)]
+        } 
+        entries = [...entries, {"entry": entry, "message": message }]
         timer_running = false;
         timer_paused = false;
-        minutesLeft = 20
-        const audio = new Audio('audio_file.mp3');
-        audio.play()
+        minutesLeft = DEFAULT_TIMER_MINUTES;
+        if (entry) {
+            const audio = new Audio('yes-break-msg-1.mp3');
+            audio.play()
+        } else {
+            const audio = new Audio('no-break-msg-1.mp3');
+            audio.play()
+        }
     }
     function startTimer() {
         welcome_screen = false;
@@ -102,10 +121,20 @@
 
     $: (timer_running && minutesLeft == 0) && GoTakeABreak()
     $: timer_ended = timer_running == false && timer_running == false
+    // Messages for success and failure
+    /**
+	 * @param {number} max
+	 */
+    function getRandomInt(max) {
+     return Math.floor(Math.random() * max);
+    }
+    let success_msgs = ["You did it! :D", "Your body thanks you :hug", "I'm happy you did that c:", "Look at you! Pop off Queen!"]
+    let failure_msgs = ["It's okay! You got it next time :)", "Thanks for trying! It counts just as much :hug", "It's okay :hug - you got it next time c:"]
 </script>
 <div class="main">
+    <h1>Kitty's Counter</h1>
     {#if welcome_screen}
-    <div>Hello!</div>
+    <div style="padding:16px">{"Hello! This is an attempt to make life +1% better! May it help with it's creation or use (:"}</div>
      <button on:click={startTimer}>Click Here</button>
     {:else if timer_running}
         <div class="animate-flicker">Timer status: {timer_paused?"Currently paused (:":"In progress :D ..."}</div>
@@ -119,10 +148,16 @@
         {!timer_running?"(: Set Timer For ...":""}  {minutesLeft} Minute(s) {timer_running? "Left!":""}
         <button on:click={incrementMinute} disabled={timer_running && !timer_paused}>+</button>
     </div>
-    <div class="list">
-    {#each entries as entry}
-    <!-- Use Green and add a star for good entries, Add a counter on successes,  -->
-        <div class="list-item">{entry?"You did it": "You did not, but it's okay!"}</div>
-    {/each}
-    </div>
+    {#if entries.length > 0}
+        <div class="list">
+        {#each entries as entry}
+        <!-- Use Green and add a star for good entries, Add a counter on successes,  -->
+            {#if entry.entry}
+                <div class="list-item-success">{entry.message}</div>
+            {:else}
+                <div class="list-item-failure">{entry.message}</div>
+            {/if}
+        {/each}
+        </div>
+    {/if}
 </div>
